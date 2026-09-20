@@ -26,24 +26,34 @@ const solanaMetadata = {
   We are intentionally keeping ONE editable rarity plan while artwork is built.
   Trait weights are controlled by filenames: Trait Name#WEIGHT.png
 */
-const johnnyBlockLayers = [
-  { name: "Background" },
-  { name: "Body" },
-  { name: "Outfit" },
-  { name: "Hair" },
-  { name: "Eyewear" },
-  { name: "Chain" },
-  { name: "Hand" },
-  { name: "Special" },
-  { name: "Effects" },
+const tierLayers = (tier) => [
+  { name: `${tier} Background`, options: { displayName: "Background" } },
+  { name: `${tier} Body`, options: { displayName: "Body" } },
+  { name: `${tier} Outfit`, options: { displayName: "Outfit" } },
+  { name: `${tier} Hair`, options: { displayName: "Hair" } },
+  { name: `${tier} Eyewear`, options: { displayName: "Eyewear" } },
+  { name: `${tier} Chain`, options: { displayName: "Chain" } },
+  { name: `${tier} Hand`, options: { displayName: "Hand" } },
+  { name: `${tier} Special`, options: { displayName: "Special" } },
+  { name: `${tier} Effects`, options: { displayName: "Effects" } },
 ];
 
+const streetLayers = tierLayers("Street");
+const eliteLayers = tierLayers("Elite");
+const genesisLayers = tierLayers("Genesis");
+
+// Exact tier ID ranges are enforced by separate layer configurations.
+// Preview mode generates four examples from each tier: 1-4, 5-8, 9-12.
 const layerConfigurations = process.env.JB_PREVIEW
-  ? [{ growEditionSizeTo: 12, layersOrder: johnnyBlockLayers }]
+  ? [
+      { growEditionSizeTo: 4, layersOrder: streetLayers },
+      { growEditionSizeTo: 8, layersOrder: eliteLayers },
+      { growEditionSizeTo: 12, layersOrder: genesisLayers },
+    ]
   : [
-      { growEditionSizeTo: 700, layersOrder: johnnyBlockLayers },
-      { growEditionSizeTo: 950, layersOrder: johnnyBlockLayers },
-      { growEditionSizeTo: 1000, layersOrder: johnnyBlockLayers },
+      { growEditionSizeTo: 700, layersOrder: streetLayers },
+      { growEditionSizeTo: 950, layersOrder: eliteLayers },
+      { growEditionSizeTo: 1000, layersOrder: genesisLayers },
     ];
 
 const shuffleLayerConfigurations = false;
