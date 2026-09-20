@@ -3,9 +3,11 @@ const path = require("path");
 const { createCanvas } = require("canvas");
 
 const ROOT = path.join(process.cwd(), "layers");
+const TIERS = ["Street", "Elite", "Genesis"];
 const SIZE = 2048;
 const dirs = ["Background","Body","Outfit","Hair","Eyewear","Chain","Hand","Special","Effects"];
 dirs.forEach(d => fs.mkdirSync(path.join(ROOT,d), {recursive:true}));
+TIERS.forEach(t => dirs.forEach(d => fs.mkdirSync(path.join(ROOT, `${t} ${d}`), {recursive:true})));
 
 function save(layer, name, draw) {
   const c=createCanvas(SIZE,SIZE), x=c.getContext("2d");
@@ -50,4 +52,13 @@ save("Effects","No Effect#55.png",x=>{});
 save("Effects","Green Chain Glow#12.png",x=>{x.strokeStyle="rgba(70,255,145,.55)";x.lineWidth=35;for(let r=520;r<900;r+=120){x.beginPath();x.arc(1024,950,r,0,Math.PI*2);x.stroke();}});
 save("Effects","Genesis Sparks#2.png",x=>{x.fillStyle="#ffe17a";for(let i=0;i<26;i++){let a=i*.83,r=500+(i%5)*130;x.beginPath();x.arc(1024+Math.cos(a)*r,950+Math.sin(a)*r,12+(i%3)*7,0,Math.PI*2);x.fill();}});
 
-console.log("Johnny Block prototype layer pack created.");
+// Copy prototype assets into each tier folder so preview mode always has runnable assets.
+// These remain temporary until the approved production PNG pack replaces them.
+TIERS.forEach(tier => dirs.forEach(layer => {
+  const src = path.join(ROOT, layer);
+  const dst = path.join(ROOT, `${tier} ${layer}`);
+  for (const file of fs.readdirSync(src).filter(f => f.toLowerCase().endsWith(".png"))) {
+    fs.copyFileSync(path.join(src,file), path.join(dst,file));
+  }
+}));
+console.log("Johnny Block prototype layer pack created for Street, Elite, and Genesis preview tiers.");
