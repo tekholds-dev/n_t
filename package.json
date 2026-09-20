@@ -19,7 +19,9 @@
     "pixelate": "node utils/pixelate.js",
     "update_info": "node utils/update_info.js",
     "preview_gif": "node utils/preview_gif.js",
-    "generate_metadata": "node utils/generate_metadata.js"
+    "generate_metadata": "node utils/generate_metadata.js",
+    "johnny:layers": "node scripts/create-johnny-block-demo.js",
+    "johnny:preview": "node scripts/create-johnny-block-demo.js && JB_PREVIEW=1 node index.js && node utils/preview.js"
   },
   "author": "Daniel Eugene Botha (HashLips)",
   "license": "MIT",
