@@ -4,55 +4,65 @@ const { NETWORK } = require(`${basePath}/constants/network.js`);
 
 const network = NETWORK.eth;
 
-// General metadata for Ethereum
-const namePrefix = "Your Collection";
-const description = "Remember to replace this description";
-const baseUri = "ipfs://NewUriToReplace";
+// JOHNNY BLOCK — BLOCKCHAIN HEIGHTS
+const namePrefix = "Johnny Block";
+const description =
+  "Johnny Block — Blockchain Heights. A 1,000-piece generative collection built across Street Rare, Elite Rare, and Genesis Legendary districts.";
+const baseUri = "ipfs://REPLACE_AFTER_UPLOAD";
 
 const solanaMetadata = {
-  symbol: "YC",
-  seller_fee_basis_points: 1000, // Define how much % you want from secondary market sales 1000 = 10%
-  external_url: "https://www.youtube.com/c/hashlipsnft",
-  creators: [
-    {
-      address: "7fXNuer5sbZtaTEPhtJ5g5gNtuyRoKkvxdjEjEnPN4mC",
-      share: 100,
-    },
-  ],
+  symbol: "JBLK",
+  seller_fee_basis_points: 500,
+  external_url: "",
+  creators: [],
 };
 
-// If you have selected Solana then the collection starts from 0 automatically
+/*
+  COLLECTION SUPPLY
+  #0001-#0700  Street Rare        700
+  #0701-#0950  Elite Rare         250
+  #0951-#1000  Genesis Legendary   50
+
+  We are intentionally keeping ONE editable rarity plan while artwork is built.
+  Trait weights are controlled by filenames: Trait Name#WEIGHT.png
+*/
+const johnnyBlockLayers = [
+  { name: "Background" },
+  { name: "Body" },
+  { name: "Outfit" },
+  { name: "Hair" },
+  { name: "Eyewear" },
+  { name: "Chain" },
+  { name: "Hand" },
+  { name: "Special" },
+  { name: "Effects" },
+];
+
 const layerConfigurations = [
   {
-    growEditionSizeTo: 5,
-    layersOrder: [
-      { name: "Background" },
-      { name: "Eyeball" },
-      { name: "Eye color" },
-      { name: "Iris" },
-      { name: "Shine" },
-      { name: "Bottom lid" },
-      { name: "Top lid" },
-    ],
+    growEditionSizeTo: 700,
+    layersOrder: johnnyBlockLayers,
+  },
+  {
+    growEditionSizeTo: 950,
+    layersOrder: johnnyBlockLayers,
+  },
+  {
+    growEditionSizeTo: 1000,
+    layersOrder: johnnyBlockLayers,
   },
 ];
 
 const shuffleLayerConfigurations = false;
-
 const debugLogs = false;
 
 const format = {
-  width: 512,
-  height: 512,
-  smoothing: false,
+  width: 2048,
+  height: 2048,
+  smoothing: true,
 };
 
-const gif = {
-  export: false,
-  repeat: 0,
-  quality: 100,
-  delay: 500,
-};
+const gif = { export: false, repeat: 0, quality: 100, delay: 500 };
 
 const text = {
   only: false,
@@ -67,33 +77,34 @@ const text = {
   spacer: " => ",
 };
 
-const pixelFormat = {
-  ratio: 2 / 128,
-};
+const pixelFormat = { ratio: 2 / 128 };
 
+// Artwork should supply the actual tier backgrounds.
 const background = {
-  generate: true,
-  brightness: "80%",
+  generate: false,
+  brightness: "100%",
   static: false,
   default: "#000000",
 };
 
-const extraMetadata = {};
+const extraMetadata = {
+  universe: "Blockchain Heights",
+  collection_size: 1000,
+};
 
 const rarityDelimiter = "#";
-
 const uniqueDnaTorrance = 10000;
 
 const preview = {
   thumbPerRow: 5,
-  thumbWidth: 50,
+  thumbWidth: 250,
   imageRatio: format.height / format.width,
   imageName: "preview.png",
 };
 
 const preview_gif = {
   numberOfImages: 5,
-  order: "ASC", // ASC, DESC, MIXED
+  order: "ASC",
   repeat: 0,
   quality: 100,
   delay: 500,
