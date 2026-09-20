@@ -38,20 +38,13 @@ const johnnyBlockLayers = [
   { name: "Effects" },
 ];
 
-const layerConfigurations = [
-  {
-    growEditionSizeTo: 700,
-    layersOrder: johnnyBlockLayers,
-  },
-  {
-    growEditionSizeTo: 950,
-    layersOrder: johnnyBlockLayers,
-  },
-  {
-    growEditionSizeTo: 1000,
-    layersOrder: johnnyBlockLayers,
-  },
-];
+const layerConfigurations = process.env.JB_PREVIEW
+  ? [{ growEditionSizeTo: 12, layersOrder: johnnyBlockLayers }]
+  : [
+      { growEditionSizeTo: 700, layersOrder: johnnyBlockLayers },
+      { growEditionSizeTo: 950, layersOrder: johnnyBlockLayers },
+      { growEditionSizeTo: 1000, layersOrder: johnnyBlockLayers },
+    ];
 
 const shuffleLayerConfigurations = false;
 const debugLogs = false;
