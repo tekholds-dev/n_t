@@ -20,9 +20,9 @@
     "update_info": "node utils/update_info.js",
     "preview_gif": "node utils/preview_gif.js",
     "generate_metadata": "node utils/generate_metadata.js",
-    "johnny:layers": "node scripts/create-johnny-block-demo.js",
-    "johnny:preview": "node scripts/setup-production-layers.js && node scripts/create-johnny-block-demo.js && JB_PREVIEW=1 node index.js && node utils/preview.js",
-    "johnny:setup": "node scripts/setup-production-layers.js"
+    "johnny:preview": "node scripts/validate-production-assets.js && JB_PREVIEW=1 node index.js && node utils/preview.js",
+    "johnny:setup": "node scripts/setup-production-layers.js",
+    "johnny:generate": "node scripts/validate-production-assets.js && node index.js"
   },
   "author": "Daniel Eugene Botha (HashLips)",
   "license": "MIT",
